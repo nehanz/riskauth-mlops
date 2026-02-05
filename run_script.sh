@@ -9,7 +9,7 @@ pip install -r requirements.txt
 
 read -p "Install riskauth-ml package? (yes/no) " response
 if [ "$response" = "yes" ]; then
-    pip install -e ../riskauth-ml
+    pip install -e ../riskauth_ml
 fi
 
 
