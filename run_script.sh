@@ -7,4 +7,10 @@ fi
 source venv/bin/activate
 pip install -r requirements.txt
 
+read -p "Install riskauth-ml package? (yes/no) " response
+if [ "$response" = "yes" ]; then
+    pip install -e ../riskauth-ml
+fi
+
+
 uvicorn services.api:app --reload
