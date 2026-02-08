@@ -1,3 +1,6 @@
+from policy.tenant_rules import get_rules
+
+
 def make_decision(score: float, tenant_id: str) -> str:
     rules = get_rules(tenant_id)
 
