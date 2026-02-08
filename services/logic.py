@@ -1,6 +1,8 @@
-def make_decision(score: float) -> str:
-    if score < 0.4:
+def make_decision(score: float, tenant_id: str) -> str:
+    rules = get_rules(tenant_id)
+
+    if score < rules["allow_threshold"]:
         return "ALLOW"
-    elif score < 0.7:
+    elif score < rules["challenge_threshold"]:
         return "CHALLENGE"
     return "BLOCK"

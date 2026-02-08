@@ -4,8 +4,7 @@ from riskauth_ml.inference.scorer import score
 from .schemas import AuthEvent, RiskResponse
 from .logic import make_decision
 from storage.event_store import save_event
-
-
+from policy.tenant_rules import get_rules
 
 app = FastAPI(
     title="RiskAuth API",
@@ -17,7 +16,7 @@ app = FastAPI(
 @app.post("/auth-event", response_model=RiskResponse)
 def process_auth_event(event: AuthEvent):
     risk_score = score(event.dict())
-    decision = make_decision(risk_score)
+    decision = make_decision(risk_score, event.tenant_id)
 
     save_event(event.dict(), risk_score, decision)
 
@@ -25,4 +24,3 @@ def process_auth_event(event: AuthEvent):
         risk_score=risk_score,
         decision=decision
     )
-
